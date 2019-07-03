@@ -12,6 +12,9 @@ export class AppComponent {
 
   isRedditView = false;
   isTwitterView = false;
+  // 0 - neutral
+  // (+/-).2 - .5 positive/negative
+  //(+/-) <= .5 very positive/negative
 
   redditView(){
     if(this.isRedditView == true){
@@ -33,9 +36,12 @@ export class AppComponent {
   
   items: Observable<any[]>;
   constructor(db: AngularFirestore) {
-   db.collection("twitter").get().subscribe((querySnapshot) => {
+   db.collection("Twitter").get().subscribe((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-        console.log(doc.data());
+       // console.log(doc.data());
+        doc.data().polarity.forEach((pol) =>{
+          console.log(pol.polarity);
+        })
     });
 });
   }
