@@ -23,3 +23,19 @@
     <button type="button" class="btn btn-primary">Web Service</button>
     <button type="button" class="btn btn-primary">Other</button>
   </div>
+  <table class="table table-hover" style="width: 25%; position: relative; top: 80px; left: 10px">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Tweet Feed</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-light" *ngFor="let tweet of influArray.slice(0, 5)">
+        <th scope="row">{{tweet.tweetName}}</th>
+        <td>{{tweet.tweetText}}</td>
+        <td>{{tweet.tweetDate}}}</td>
+      </tr>
+    </tbody>
+  </table> 

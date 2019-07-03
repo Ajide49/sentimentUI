@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'sentimentUI';
-
+  public influArray;
   isRedditView = false;
   isTwitterView = false;
   // 0 - neutral
@@ -33,17 +33,28 @@ export class AppComponent {
     this.isTwitterView = true;
     }
   }
-  
   items: Observable<any[]>;
   constructor(db: AngularFirestore) {
+    var influArray= [];
    db.collection("Twitter").get().subscribe((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-       // console.log(doc.data());
-        doc.data().polarity.forEach((pol) =>{
-          console.log(pol.polarity);
-        })
+       console.log(doc.data());
+       var influence = (doc.data().favorite_count)+(doc.data().retweet_count);
+       var tweet = {
+        tweetInflu: influence,
+        tweetText: doc.data().text,
+        tweetDate: doc.data().created_at,
+        tweetName: doc.data().user.screen_name
+      }
+      influArray.push(tweet);
     });
+    influArray.sort(function(a, b){
+      return b.tweetInflu-a.tweetInflu
+    })
+    console.log(influArray);
+
 });
+  this.influArray = influArray;
   }
   
 }
