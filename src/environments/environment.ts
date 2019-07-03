@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyCFuHZUv4gPAORcXhPw_Egnt1RoQ_iNa-c',
+    authDomain: '### FIREBASE AUTH DOMAIN ###',
+    projectId: 'glass-bridge-240819',
+  }
 };
 
 /*

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: `./app.component.html`,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
@@ -10,7 +12,7 @@ export class AppComponent {
 
   isRedditView = false;
   isTwitterView = false;
-  
+
   redditView(){
     if(this.isRedditView == true){
       this.isRedditView = false;
@@ -28,4 +30,14 @@ export class AppComponent {
     this.isTwitterView = true;
     }
   }
+  
+  items: Observable<any[]>;
+  constructor(db: AngularFirestore) {
+   db.collection("twitter").get().subscribe((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+    });
+});
+  }
+  
 }
